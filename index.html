@@ -9,6 +9,8 @@
       --primary-color: #243B55;
       --secondary-color: #141E30;
       --accent-color: #3a7bd5;
+      --error-color: #e74c3c;
+      --success-color: #2ecc71;
       --text-color: #333;
       --light-gray: #f5f5f5;
       --border-radius: 12px;
@@ -35,7 +37,6 @@
       overflow-x: hidden;
     }
 
-    /* الخلفية المتحركة للجوال */
     body::before {
       content: "";
       position: fixed;
@@ -82,7 +83,6 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    /* إطار زخرفي علوي */
     .register-box::before {
       content: "";
       position: absolute;
@@ -201,7 +201,6 @@
       transform: translateY(0);
     }
 
-    /* الزخرفة تحت الزر */
     .btn-decoration {
       height: 2px;
       width: 60%;
@@ -220,21 +219,22 @@
       color: var(--accent-color);
       font-weight: 600;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
 
     .login-link a:hover {
       text-decoration: underline;
+      color: var(--primary-color);
     }
 
-    #successMsg {
+    .message {
       display: none;
-      background-color: #e6f7ee;
-      color: #28a745;
       padding: 15px;
       border-radius: var(--border-radius);
       margin-top: 20px;
       font-weight: 600;
       animation: fadeIn 0.5s ease;
+      text-align: center;
     }
 
     @keyframes fadeIn {
@@ -242,7 +242,24 @@
       to { opacity: 1; }
     }
 
-    /* تأثيرات للجوال */
+    .success-message {
+      background-color: rgba(46, 204, 113, 0.1);
+      color: var(--success-color);
+      border: 1px solid rgba(46, 204, 113, 0.3);
+    }
+
+    .error-message {
+      background-color: rgba(231, 76, 60, 0.1);
+      color: var(--error-color);
+      border: 1px solid rgba(231, 76, 60, 0.3);
+    }
+
+    .info-message {
+      background-color: rgba(52, 152, 219, 0.1);
+      color: #3498db;
+      border: 1px solid rgba(52, 152, 219, 0.3);
+    }
+
     @media (max-width: 480px) {
       body {
         padding: 15px;
@@ -278,16 +295,6 @@
         font-size: 0.85rem;
       }
     }
-
-    @media (max-width: 360px) {
-      .register-box {
-        padding: 20px 15px;
-      }
-
-      .register-box h2 {
-        font-size: 1.2rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -296,11 +303,7 @@
       <img src="https://i.postimg.cc/FzbXX2NS/pngegg.png" alt="Vitalize Logo" class="logo">
       <h2>Vitalize Registration</h2>
 
-      <form action="https://docs.google.com/forms/d/e/1FAIpQLSersIOADeAL4zZ7H7_yfDKyGlPb4lkpMkXANJbTmHzCAtTXnA/formResponse" 
-            method="POST" 
-            target="hidden_iframe" 
-            onsubmit="submitted=true;">
-
+      <form id="registerForm">
         <div class="form-group">
           <label for="countryCode">Country Code</label>
           <input type="text" id="countryCode" value="+27" readonly>
@@ -308,22 +311,22 @@
 
         <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="entry.11026931" placeholder="Enter phone number" required>
+          <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="entry.70675987" placeholder="Enter password" required>
+          <input type="password" id="password" name="password" placeholder="Enter password" required>
         </div>
 
         <div class="form-group">
           <label for="confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPassword" name="entry.2139866834" placeholder="Confirm password" required>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
         </div>
 
         <div class="form-group">
           <label for="invite">Invitation Code</label>
-          <input type="text" id="invite" name="entry.1944770665" value="25114" readonly>
+          <input type="text" id="invite" name="invite" value="25114" readonly>
         </div>
 
         <div class="checkbox-group">
@@ -337,40 +340,69 @@
         </div>
       </form>
 
-      <iframe name="hidden_iframe" style="display:none;"></iframe>
-      <p id="successMsg">✅ Registration successful! Welcome to Vitalize</p>
+      <div id="successMessage" class="message success-message">✅ Registration successful! Welcome to Vitalize</div>
+      <div id="errorMessage" class="message error-message">❌ Password format is incorrect. Password must be at least 8 characters long and contain a number.</div>
+      <div id="loginMessage" class="message info-message">ℹ️ You must create an account first.</div>
 
       <div class="login-link">
-        Already have an account? <a href="#">Login here</a>
+        Already have an account? <a href="#" id="loginLink">Login here</a>
       </div>
     </div>
   </div>
 
   <script>
-    let submitted = false;
-    const form = document.querySelector("form");
-    const successMsg = document.getElementById("successMsg");
-    
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      
-      // Simulate form submission
-      setTimeout(() => {
-        if (!submitted) return;
+    document.addEventListener('DOMContentLoaded', function() {
+      const registerForm = document.getElementById('registerForm');
+      const successMessage = document.getElementById('successMessage');
+      const errorMessage = document.getElementById('errorMessage');
+      const loginMessage = document.getElementById('loginMessage');
+      const loginLink = document.getElementById('loginLink');
+
+      // Handle login link click
+      loginLink.addEventListener('click', function(e) {
+        e.preventDefault();
         
-        successMsg.style.display = "block";
-        form.style.opacity = "0";
-        form.style.height = "0";
-        form.style.margin = "0";
-        form.style.padding = "0";
-        form.style.overflow = "hidden";
-        form.style.transition = "all 0.4s ease";
+        // Hide other messages
+        successMessage.style.display = 'none';
+        errorMessage.style.display = 'none';
         
-        // Actually submit the form after animation
+        // Show login message
+        loginMessage.style.display = 'block';
+        
+        // Hide message after 3 seconds
         setTimeout(() => {
-          form.submit();
-        }, 400);
-      }, 1000);
+          loginMessage.style.display = 'none';
+        }, 3000);
+      });
+
+      // Handle form submission
+      registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Hide all messages first
+        successMessage.style.display = 'none';
+        errorMessage.style.display = 'none';
+        loginMessage.style.display = 'none';
+        
+        // Simulate form processing
+        setTimeout(() => {
+          // Here you would normally validate the password
+          // For demonstration, we'll always show the error message
+          errorMessage.style.display = 'block';
+          
+          // You can add actual password validation like:
+          // const password = document.getElementById('password').value;
+          // if (password.length >= 8 && /\d/.test(password)) {
+          //   successMessage.style.display = 'block';
+          //   registerForm.reset();
+          // } else {
+          //   errorMessage.style.display = 'block';
+          // }
+          
+          // Scroll to message
+          errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 1000);
+      });
     });
   </script>
 </body>
