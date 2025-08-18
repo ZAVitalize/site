@@ -5,74 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Vitalize - Register</title>
   <style>
-    body {
+    :root {
+      --primary-color: #243B55;
+      --secondary-color: #141E30;
+      --accent-color: #3a7bd5;
+      --text-color: #333;
+      --light-gray: #f5f5f5;
+      --border-radius: 12px;
+      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(270deg, #141E30, #243B55, #1f2a3d);
-      background-size: 600% 600%;
-      animation: bgAnimation 15s ease infinite;
-      overflow: hidden;
-    }
-
-    @keyframes bgAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .register-box {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      padding: 30px 20px 50px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
+      padding: 20px;
+      color: var(--text-color);
+      line-height: 1.6;
       position: relative;
-      z-index: 1;
-      animation: fadeInUp 1s ease-out;
-      box-shadow: 0 0 15px rgba(36,59,85,0.2);
+      overflow-x: hidden;
     }
 
-    /* إطار متحرك حوالين البوكس */
-    .register-box::before {
+    /* الخلفية المتحركة للجوال */
+    body::before {
       content: "";
-      position: absolute;
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #243B55, #141E30, #00c6ff, #0072ff);
-      background-size: 300% 300%;
-      animation: borderGlow 6s linear infinite;
-      z-index: -1;
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle, rgba(255,255,255,0.08) 1%, transparent 1%) 0 0,
+        radial-gradient(circle, rgba(255,255,255,0.05) 1%, transparent 1%) 20px 20px;
+      background-size: 40px 40px;
+      animation: moveBg 20s linear infinite;
+      z-index: 0;
     }
 
-    @keyframes borderGlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes moveBg {
+      0% { transform: translate(0,0); }
+      100% { transform: translate(40px,40px); }
+    }
+
+    .register-container {
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 0.6s ease-out;
     }
 
     @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(50px); }
+      0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
+    .register-box {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 30px 25px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* إطار زخرفي علوي */
+    .register-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    }
+
     .logo {
-      width: 120px;
-      margin: 20px auto;
+      width: 100px;
+      height: auto;
+      margin: 0 auto 20px;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
 
     .register-box h2 {
       margin-bottom: 25px;
-      color: #243B55;
-      font-size: 24px;
-      letter-spacing: 1px;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      font-weight: 700;
     }
 
     .form-group {
@@ -81,99 +114,111 @@
     }
 
     label {
-      font-weight: 600;
       display: block;
-      margin-bottom: 6px;
-      font-size: 15px;
-      color: #333;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary-color);
     }
 
-    input[type="text"], input[type="tel"], input[type="password"] {
+    input[type="text"],
+    input[type="tel"],
+    input[type="password"] {
       width: 100%;
-      padding: 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: 0.3s;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background-color: white;
     }
 
     input:focus {
-      border-color: #243B55;
-      box-shadow: 0 0 8px rgba(36, 59, 85, 0.3);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.2);
       outline: none;
     }
 
     input[readonly] {
-      background: #f0f0f0;
-      font-weight: bold;
-      color: #555;
+      background-color: var(--light-gray);
+      color: #666;
       cursor: not-allowed;
     }
 
     .checkbox-group {
-      text-align: left;
-      margin: 15px 0;
-      font-size: 14px;
-    }
-
-    .checkbox-group label {
+      margin: 20px 0;
       display: flex;
       align-items: center;
-      font-weight: normal;
-      color: #333;
     }
 
     .checkbox-group input {
-      margin-right: 8px;
+      margin-right: 10px;
+      min-width: 18px;
+      min-height: 18px;
     }
 
-    .btn {
-      background: linear-gradient(135deg, #243B55, #141E30);
-      color: #fff;
-      padding: 16px;
-      border: none;
-      width: 100%;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-      font-weight: bold;
-      margin-top: 20px;
+    .checkbox-group label {
+      font-weight: normal;
+      margin-bottom: 0;
+      font-size: 0.9rem;
+    }
+
+    .checkbox-group a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    .checkbox-group a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-container {
+      margin-top: 25px;
       position: relative;
     }
 
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: var(--border-radius);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(36, 59, 85, 0.3);
+    }
+
     .btn:hover {
-      background: linear-gradient(135deg, #141E30, #243B55);
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 15px rgba(36, 59, 85, 0.4);
     }
 
-    /* خط رفيع تحت الزر */
-    .btn::after {
-      content: "";
-      position: absolute;
-      bottom: -8px;
-      left: 25%;
-      width: 50%;
-      height: 3px;
-      background: linear-gradient(90deg, #00c6ff, #0072ff);
-      border-radius: 5px;
-      animation: underlineAnim 2s infinite alternate;
+    .btn:active {
+      transform: translateY(0);
     }
 
-    @keyframes underlineAnim {
-      from { width: 30%; left: 35%; }
-      to { width: 60%; left: 20%; }
+    /* الزخرفة تحت الزر */
+    .btn-decoration {
+      height: 2px;
+      width: 60%;
+      margin: 15px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(58, 123, 213, 0.4), transparent);
+      border-radius: 50%;
     }
 
     .login-link {
-      margin-top: 30px;
-      font-size: 16px;
+      margin-top: 25px;
+      font-size: 0.95rem;
+      color: #666;
     }
 
     .login-link a {
-      color: #243B55;
-      font-weight: bold;
+      color: var(--accent-color);
+      font-weight: 600;
       text-decoration: none;
     }
 
@@ -183,73 +228,148 @@
 
     #successMsg {
       display: none;
-      color: green;
-      font-weight: bold;
-      margin-top: 15px;
-      font-size: 16px;
+      background-color: #e6f7ee;
+      color: #28a745;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-top: 20px;
+      font-weight: 600;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* تأثيرات للجوال */
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+
+      .register-box {
+        padding: 25px 20px;
+      }
+
+      .logo {
+        width: 90px;
+        margin-bottom: 15px;
+      }
+
+      .register-box h2 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      input[type="tel"],
+      input[type="password"] {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+      }
+
+      .btn {
+        padding: 14px;
+        font-size: 0.95rem;
+      }
+
+      .checkbox-group label {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .register-box {
+        padding: 20px 15px;
+      }
+
+      .register-box h2 {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="register-box">
-    <img src="https://i.postimg.cc/FzbXX2NS/pngegg.png" alt="Vitalize Logo" class="logo">
-    <h2>Vitalize Registration</h2>
+  <div class="register-container">
+    <div class="register-box">
+      <img src="https://i.postimg.cc/FzbXX2NS/pngegg.png" alt="Vitalize Logo" class="logo">
+      <h2>Vitalize Registration</h2>
 
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSersIOADeAL4zZ7H7_yfDKyGlPb4lkpMkXANJbTmHzCAtTXnA/formResponse" 
-          method="POST" 
-          target="hidden_iframe" 
-          onsubmit="submitted=true;">
+      <form action="https://docs.google.com/forms/d/e/1FAIpQLSersIOADeAL4zZ7H7_yfDKyGlPb4lkpMkXANJbTmHzCAtTXnA/formResponse" 
+            method="POST" 
+            target="hidden_iframe" 
+            onsubmit="submitted=true;">
 
-      <div class="form-group">
-        <label for="countryCode">Country Code</label>
-        <input type="text" id="countryCode" value="+27" readonly>
+        <div class="form-group">
+          <label for="countryCode">Country Code</label>
+          <input type="text" id="countryCode" value="+27" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="entry.11026931" placeholder="Enter phone number" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="entry.70675987" placeholder="Enter password" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="entry.2139866834" placeholder="Confirm password" required>
+        </div>
+
+        <div class="form-group">
+          <label for="invite">Invitation Code</label>
+          <input type="text" id="invite" name="entry.1944770665" value="25114" readonly>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+        </div>
+
+        <div class="btn-container">
+          <button type="submit" class="btn">Register</button>
+          <div class="btn-decoration"></div>
+        </div>
+      </form>
+
+      <iframe name="hidden_iframe" style="display:none;"></iframe>
+      <p id="successMsg">✅ Registration successful! Welcome to Vitalize</p>
+
+      <div class="login-link">
+        Already have an account? <a href="#">Login here</a>
       </div>
-
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="entry.11026931" placeholder="Enter phone number" required>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="entry.70675987" placeholder="Enter password" required>
-      </div>
-
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" name="entry.2139866834" placeholder="Confirm password" required>
-      </div>
-
-      <div class="form-group">
-        <label for="invite">Invitation Code</label>
-        <input type="text" id="invite" name="entry.1944770665" value="25114" readonly>
-      </div>
-
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" required>
-          I agree to the <a href="#">Terms & Conditions</a>
-        </label>
-      </div>
-
-      <button type="submit" class="btn">Register</button>
-    </form>
-
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
-    <p id="successMsg">✅ Registration successful!</p>
-
-    <div class="login-link">
-      Already have an account? <a href="#">Login</a>
     </div>
   </div>
 
   <script>
     let submitted = false;
-    document.querySelector("form").addEventListener("submit", function(){
+    const form = document.querySelector("form");
+    const successMsg = document.getElementById("successMsg");
+    
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      // Simulate form submission
       setTimeout(() => {
-        if (submitted) {
-          document.getElementById("successMsg").style.display = "block";
-        }
+        if (!submitted) return;
+        
+        successMsg.style.display = "block";
+        form.style.opacity = "0";
+        form.style.height = "0";
+        form.style.margin = "0";
+        form.style.padding = "0";
+        form.style.overflow = "hidden";
+        form.style.transition = "all 0.4s ease";
+        
+        // Actually submit the form after animation
+        setTimeout(() => {
+          form.submit();
+        }, 400);
       }, 1000);
     });
   </script>
