@@ -36,9 +36,9 @@
 
     .register-box {
       background: rgba(255, 255, 255, 0.95);
-      border-radius: 0; /* شاشة كاملة على الموبايل */
+      border-radius: 0;
       box-shadow: none;
-      padding: 30px 20px;
+      padding: 30px 20px 40px;
       width: 100%;
       height: 100vh;
       max-width: 100%;
@@ -47,6 +47,9 @@
       z-index: 1;
       animation: fadeInUp 1s ease-out;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     @keyframes fadeInUp {
@@ -55,8 +58,8 @@
     }
 
     .logo {
-      width: 110px;
-      margin: 10px 0 20px 0;
+      width: 120px;
+      margin: 20px auto;
     }
 
     .register-box h2 {
@@ -79,7 +82,7 @@
       color: #333;
     }
 
-    input {
+    input[type="text"], input[type="tel"], input[type="password"] {
       width: 100%;
       padding: 14px;
       border: 1px solid #ccc;
@@ -101,6 +104,23 @@
       cursor: not-allowed;
     }
 
+    .checkbox-group {
+      text-align: left;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      color: #333;
+    }
+
+    .checkbox-group input {
+      margin-right: 8px;
+    }
+
     .btn {
       background: linear-gradient(135deg, #243B55, #141E30);
       color: #fff;
@@ -112,6 +132,7 @@
       cursor: pointer;
       transition: 0.3s;
       font-weight: bold;
+      margin-top: 20px;
     }
 
     .btn:hover {
@@ -146,7 +167,7 @@
 </head>
 <body>
   <div class="register-box">
-    <img src="https://i.ibb.co/d04cQjGh/v-logo-260nw-727645264.webp" alt="Vitalize Logo" class="logo">
+    <img src="https://i.postimg.cc/FzbXX2NS/pngegg.png" alt="Vitalize Logo" class="logo">
     <h2>Vitalize Registration</h2>
 
     <form action="https://docs.google.com/forms/d/e/1FAIpQLSersIOADeAL4zZ7H7_yfDKyGlPb4lkpMkXANJbTmHzCAtTXnA/formResponse" 
@@ -179,12 +200,21 @@
         <input type="text" id="invite" name="entry.1944770665" value="25114" readonly>
       </div>
 
+      <!-- Checkbox للشروط -->
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" required>
+          I agree to the <a href="#">Terms & Conditions</a>
+        </label>
+      </div>
+
       <button type="submit" class="btn">Register</button>
     </form>
 
     <iframe name="hidden_iframe" style="display:none;"></iframe>
     <p id="successMsg">✅ Registration successful!</p>
 
+    <!-- رابط تسجيل دخول وهمي -->
     <div class="login-link">
       Already have an account? <a href="#">Login</a>
     </div>
