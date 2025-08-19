@@ -7,80 +7,41 @@
   <meta name="format-detection" content="telephone=no, email=no" />
   <title>Register</title>
   <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-top: #f6f8fc;
-      --bg-bottom: #eef2f7;
-      --card: rgba(255, 255, 255, 0.9);
-      --text: #111827;
-      --muted: #6b7280;
       --primary: #ef4444;
       --primary-pressed: #dc2626;
-      --border: rgba(229, 231, 235, 0.5);
-      --ring: #fca5a5;
-      --success: #16a34a;
-      --error: #dc2626;
+      --text: #ffffff;
+      --muted: #d1d5db;
+      --border: rgba(255, 255, 255, 0.2);
+      --card: rgba(0, 0, 0, 0.3);
     }
     
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: 'Tajawal', sans-serif;
       color: var(--text);
       overflow-x: hidden;
     }
     
-    /* Animated Background */
-    .bg-animation {
+    /* Background with gradient overlay */
+    body {
+      background: url('https://i.postimg.cc/8zL4YhVX/bg-dark.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    
+    body::after {
+      content: '';
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
       z-index: -1;
-      background: linear-gradient(-45deg, #f6f8fc, #eef2f7, #f0f5ff, #e8f0fe);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-    }
-    
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    /* Floating Bubbles */
-    .bubbles {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-    }
-    
-    .bubble {
-      position: absolute;
-      bottom: -100px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      animation: floating 15s infinite ease-in;
-    }
-    
-    @keyframes floating {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        bottom: -100px;
-      }
-      100% {
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        bottom: 100%;
-      }
     }
     
     .page {
@@ -107,6 +68,13 @@
       align-items: center;
     }
     
+    .nav button {
+      color: white;
+      background: transparent;
+      border: none;
+      font-size: 18px;
+    }
+    
     .scroll {
       flex: 1;
       display: flex;
@@ -118,12 +86,7 @@
     .logo {
       width: 140px;
       margin: 8px auto 20px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-      transition: transform 0.3s ease;
-    }
-    
-    .logo:hover {
-      transform: scale(1.05);
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
     }
     
     .card {
@@ -132,15 +95,9 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       padding: 24px 20px 28px;
-      backdrop-filter: blur(5px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+      backdrop-filter: blur(8px);
     }
     
     .field {
@@ -150,9 +107,8 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.1);
       margin-top: 16px;
-      transition: all 0.3s ease;
     }
     
     .field:first-child {
@@ -161,7 +117,7 @@
     
     .field:focus-within {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--ring);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
     }
     
     .cc-badge {
@@ -172,8 +128,9 @@
       height: 28px;
       padding: 0 8px;
       border-radius: 999px;
-      background: #f3f4f6;
+      background: rgba(255, 255, 255, 0.1);
       border: 1px solid var(--border);
+      color: var(--text);
     }
     
     input {
@@ -216,30 +173,22 @@
     .btn-primary {
       background: var(--primary);
       color: #fff;
-      box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
     }
     
     .btn-primary:hover {
       background: var(--primary-pressed);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
-    }
-    
-    .btn-primary:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
     }
     
     .btn-plain {
       margin-top: 12px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.1);
       color: var(--text);
       border: 1px solid var(--border);
     }
     
     .btn-plain:hover {
-      background: rgba(255, 255, 255, 0.9);
-      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.2);
     }
     
     .footer {
@@ -256,11 +205,9 @@
       color: var(--primary);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s ease;
     }
     
     .footer a:hover {
-      color: var(--primary-pressed);
       text-decoration: underline;
     }
     
@@ -269,53 +216,31 @@
       left: 50%;
       transform: translateX(-50%);
       bottom: 24px;
-      background: #353535;
+      background: #dc2626;
       color: #fff;
       padding: 12px 24px;
       border-radius: 24px;
       font-size: 14px;
       display: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      animation: fadeIn 0.3s ease;
+      box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
       z-index: 100;
     }
     
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
-    
     /* Captcha styling */
-    .captcha-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
     .captcha {
       cursor: pointer;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 112px;
+      height: 31px;
     }
     
-    .captcha:hover {
-      transform: scale(1.05);
-    }
-    
-    /* Input focus effects */
-    input:focus {
-      animation: inputFocus 0.5s ease;
-    }
-    
-    @keyframes inputFocus {
-      0% { transform: translateX(0); }
-      20% { transform: translateX(5px); }
-      40% { transform: translateX(-5px); }
-      60% { transform: translateX(5px); }
-      80% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
+    .captcha canvas {
+      border-radius: 8px;
     }
     
     /* Responsive adjustments */
@@ -335,15 +260,11 @@
   </style>
 </head>
 <body>
-  <!-- Animated Background Elements -->
-  <div class="bg-animation"></div>
-  <div class="bubbles" id="bubbles"></div>
-
   <div class="page">
     <header class="nav">
-      <div class="left"><button type="button" style="background:transparent;border:0;font-size:18px">←</button></div>
+      <div class="left"><button type="button">←</button></div>
       <div class="title"></div>
-      <div class="right"><button type="button" style="background:transparent;border:0;font-weight:600">EN</button></div>
+      <div class="right"><button type="button">EN</button></div>
     </header>
 
     <main class="scroll">
@@ -375,7 +296,7 @@
           <input id="captchaInput" type="text" placeholder="Please enter the verification code" required/>
           <div class="captcha"><canvas id="captchaCanvas" width="112" height="31"></canvas></div>
         </div>
-        <div class="help">Verification code is case-insensitive.</div>
+        <div class="help">Enter the 3-digit verification code</div>
 
         <!-- Invitation Code fixed (entry.1944770665) -->
         <div class="field">
@@ -398,91 +319,54 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // Create floating bubbles
-    function createBubbles() {
-      const bubblesContainer = document.getElementById('bubbles');
-      const bubbleCount = 15;
-      
-      for (let i = 0; i < bubbleCount; i++) {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        
-        // Random size between 40px and 100px
-        const size = Math.random() * 60 + 40;
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-        
-        // Random position
-        bubble.style.left = `${Math.random() * 100}%`;
-        
-        // Random animation duration and delay
-        const duration = Math.random() * 20 + 10;
-        const delay = Math.random() * 10;
-        bubble.style.animationDuration = `${duration}s`;
-        bubble.style.animationDelay = `${delay}s`;
-        
-        bubblesContainer.appendChild(bubble);
-      }
-    }
-    
     // Toast notification
     const toastEl = document.getElementById('toast');
-    function toast(msg, isError = false) {
+    function toast(msg) {
       toastEl.textContent = msg;
       toastEl.style.display = 'block';
-      toastEl.style.backgroundColor = isError ? '#dc2626' : '#353535';
-      
       setTimeout(() => {
         toastEl.style.display = 'none';
       }, 2000);
     }
 
-    // captcha
+    // Simple 3-digit captcha
     const canvas = document.getElementById('captchaCanvas');
     const ctx = canvas.getContext('2d');
     let captchaText = '';
     
-    function rand(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    
-    function drawNoise() {
-      for (let i = 0; i < 10; i++) {
-        ctx.strokeStyle = `rgba(0,0,0,${Math.random() * 0.3})`;
+    function generateCaptcha() {
+      // Generate 3 random digits
+      captchaText = Math.floor(100 + Math.random() * 900).toString();
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw background
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(captchaText, canvas.width/2, canvas.height/2);
+      
+      // Add some noise
+      for(let i = 0; i < 20; i++) {
+        ctx.strokeStyle = `rgba(255, 255, 255, ${Math.random() * 0.3})`;
         ctx.beginPath();
-        ctx.moveTo(rand(0, 112), rand(0, 31));
-        ctx.lineTo(rand(0, 112), rand(0, 31));
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
         ctx.stroke();
       }
     }
     
-    function genCaptcha() {
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      captchaText = Array.from({length: 4}, () => chars[rand(0, chars.length - 1)]).join('');
-      
-      ctx.clearRect(0, 0, 112, 31);
-      ctx.fillStyle = '#f8fafc';
-      ctx.fillRect(0, 0, 112, 31);
-      drawNoise();
-      
-      // More stylish captcha text
-      ctx.fillStyle = '#111';
-      ctx.font = 'bold 18px Arial';
-      
-      // Add distortion to each character
-      for (let i = 0; i < captchaText.length; i++) {
-        const x = 20 + i * 22;
-        const y = 22 + Math.sin(i) * 3;
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(Math.random() * 0.4 - 0.2);
-        ctx.fillText(captchaText[i], 0, 0);
-        ctx.restore();
-      }
-    }
+    // Initialize captcha
+    generateCaptcha();
     
-    document.querySelector('.captcha').addEventListener('click', genCaptcha);
-    genCaptcha();
+    // Refresh captcha on click
+    document.querySelector('.captcha').addEventListener('click', generateCaptcha);
 
     // validate before submit
     const form = document.getElementById('registerForm');
@@ -493,14 +377,14 @@
       
       if (pwd !== conf) { 
         e.preventDefault(); 
-        toast('Passwords do not match.', true); 
+        toast('Passwords do not match.'); 
         return;
       }
       
-      if (userCaptcha.toUpperCase() !== captchaText.toUpperCase()) { 
+      if (userCaptcha !== captchaText) { 
         e.preventDefault(); 
-        toast('Incorrect verification code.', true); 
-        genCaptcha(); 
+        toast('Incorrect verification code.'); 
+        generateCaptcha(); 
         return;
       }
     });
@@ -508,29 +392,8 @@
     // Handle login link click
     document.getElementById('loginLink').addEventListener('click', function(e) {
       e.preventDefault();
-      toast('You must register an account first.', true);
-      
-      // Add shake animation to the card
-      const card = document.querySelector('.card');
-      card.style.animation = 'shake 0.5s';
-      setTimeout(() => {
-        card.style.animation = '';
-      }, 500);
+      toast('You must register an account first.');
     });
-    
-    // Add shake animation to CSS
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-        20%, 40%, 60%, 80% { transform: translateX(5px); }
-      }
-    `;
-    document.head.appendChild(style);
-    
-    // Initialize bubbles when page loads
-    window.addEventListener('load', createBubbles);
   </script>
 </body>
 </html>
