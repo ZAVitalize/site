@@ -27,12 +27,13 @@
       overflow-x: hidden;
     }
     
-    /* Background with gradient overlay */
+    /* Background with the provided image */
     body {
-      background: url('https://i.postimg.cc/8zL4YhVX/bg-dark.jpg') no-repeat center center fixed;
+      background: url('https://i.postimg.cc/DZ540xrb/BACKGROUND-41af007b.png') no-repeat center center fixed;
       background-size: cover;
     }
     
+    /* Dark overlay for better readability */
     body::after {
       content: '';
       position: fixed;
@@ -40,7 +41,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+      background: rgba(0, 0, 0, 0.5);
       z-index: -1;
     }
     
